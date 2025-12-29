@@ -37,6 +37,7 @@ const Layout = ({ children }: LayoutProps) => {
 
       {/* Sidebar titlee */}
       <Box px={3} py={2}>
+        
         <Typography variant="subtitle2" color="text.secondary">
           Your Apps
         </Typography>
