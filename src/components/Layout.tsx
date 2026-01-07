@@ -22,8 +22,11 @@ type LayoutProps = {
 };
 
 const Layout = ({ children }: LayoutProps) => {
-  const navigate = useNavigate();
+  // change routes when clicking menu items
+  const navigate = useNavigate(); 
+    // know which page is active
   const location = useLocation();
+  //  controls mobile drawer open/close
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const menuItems = [

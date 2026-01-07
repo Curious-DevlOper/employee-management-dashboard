@@ -13,6 +13,7 @@ This project simulates a real internal company admin system for managing employe
 - 🧭 Sidebar + Navbar layout
 - 📱 Responsive design (desktop & mobile)
 - 🎨 Clean, enterprise-style UI
+-     REST API with Express and MySQL
 
 ---
 
@@ -24,6 +25,7 @@ This project simulates a real internal company admin system for managing employe
 - **React Router**
 - **Axios**
 - **npm**
+- **MySql**
 
 ---
 
@@ -38,6 +40,10 @@ This project simulates a real internal company admin system for managing employe
 ### Login Page
 ![Login](./screenshots/login.png)
 
+⚙️ Installation
 
-
-# employee-management-dashboard
+```bash
+git clone https://github.com/your-username/employee-management-dashboard.git
+cd employee-management-dashboard
+npm install
+npm run dev
