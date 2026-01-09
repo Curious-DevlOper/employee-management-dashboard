@@ -12,4 +12,10 @@ export interface Employee {
   email: string;
   department: string;
   position: string;
+  salary: number;
 }
+
+export type CreateEmployeeDto = Omit<Employee, "id">;
+
+export type UpdateEmployeeDto = Partial<CreateEmployeeDto>;
+

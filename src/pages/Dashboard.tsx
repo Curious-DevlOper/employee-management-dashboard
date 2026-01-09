@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import {
   Box,
   Card,
@@ -14,11 +13,8 @@ const Dashboard = () => {
   const [employees, setEmployees] = useState<Employee[]>([]);
 
   useEffect(() => {
-  getEmployees().then((res: { data: Employee[] }) => {
-    setEmployees(res.data);
-  });
-}, []);
-
+    getEmployees().then((res) => setEmployees(res));
+  }, []);
 
   const totalEmployees = employees.length;
   const totalDepartments = new Set(
@@ -32,35 +28,29 @@ const Dashboard = () => {
       </Typography>
 
       <Grid container spacing={3}>
-        <Grid  >
+        <Grid  size={{ xs:12, md: 4}}>
           <Card>
             <CardContent>
               <Typography variant="h6">Total Employees</Typography>
-              <Typography variant="h3">
-                {totalEmployees}
-              </Typography>
+              <Typography variant="h3">{totalEmployees}</Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid >
+        <Grid size={{ xs:12, md: 4}}>
           <Card>
             <CardContent>
               <Typography variant="h6">Departments</Typography>
-              <Typography variant="h3">
-                {totalDepartments}
-              </Typography>
+              <Typography variant="h3">{totalDepartments}</Typography>
             </CardContent>
           </Card>
         </Grid>
 
-        <Grid >
+        <Grid size={{ xs:12, md: 4}}>
           <Card>
             <CardContent>
               <Typography variant="h6">Active Users</Typography>
-              <Typography variant="h3">
-                {totalEmployees}
-              </Typography>
+              <Typography variant="h3">{totalEmployees}</Typography>
             </CardContent>
           </Card>
         </Grid>
@@ -70,5 +60,3 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
-
-

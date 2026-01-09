@@ -1,20 +1,37 @@
+import { useState } from "react";
 import {
   Box,
   Button,
   TextField,
   Typography,
-  Paper,
+  Paper
 } from "@mui/material";
-import { useAuth } from "../context/useAuth";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    login();
-    navigate("/");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post("http://localhost:5000/api/login", {
+        email,
+        password
+      });
+
+      if (res.data.success) {
+        localStorage.setItem("auth", "true");
+        navigate("/");
+      }
+    } catch (err) {
+        console.error(err);
+
+      setError("Invalid email or password");
+    }
   };
 
   return (
@@ -24,11 +41,11 @@ const Login = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        bgcolor: "#f4f6f8",
+        bgcolor: "#f4f6f8"
       }}
     >
-      <Paper elevation={4} sx={{ p: 4, width: 350 }}>
-        <Typography variant="h5" fontWeight={600} mb={2}>
+      <Paper sx={{ p: 4, width: 350 }}>
+        <Typography variant="h5" mb={2} align="center">
           Login
         </Typography>
 
@@ -36,6 +53,8 @@ const Login = () => {
           label="Email"
           fullWidth
           margin="normal"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
         />
 
         <TextField
@@ -43,16 +62,33 @@ const Login = () => {
           type="password"
           fullWidth
           margin="normal"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
 
+        {error && (
+          <Typography color="error" mt={1}>
+            {error}
+          </Typography>
+        )}
+
         <Button
-          variant="contained"
           fullWidth
+          variant="contained"
           sx={{ mt: 2 }}
           onClick={handleLogin}
         >
-          Sign In
+          Login
         </Button>
+
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          mt={2}
+          align="center"
+        >
+          admin@company.com / admin123
+        </Typography>
       </Paper>
     </Box>
   );

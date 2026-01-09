@@ -1,13 +1,24 @@
 import axios from "axios";
-import { Employee } from "../types/Employee";
+import { CreateEmployeeDto, Employee } from "../types/Employee";
 
-const API_URL = "http://localhost:5000/api/employees";
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
+});
 
+const EMPLOYEE_ENDPOINT = "/employees";
+
+// Get all employees
 export const getEmployees = () =>
-  axios.get<Employee[]>(API_URL);
+  api.get<Employee[]>(EMPLOYEE_ENDPOINT).then(res => res.data);
 
-export const addEmployee = (employee: Employee) =>
-  axios.post(API_URL, employee);
+// Create employee
+export const createEmployee = (employee: CreateEmployeeDto) =>
+  api.post<Employee>(EMPLOYEE_ENDPOINT, employee).then(res => res.data);
 
+// Update employee
+export const updateEmployee = (id: number, employee: Partial<Employee>) =>
+  api.put<Employee>(`${EMPLOYEE_ENDPOINT}/${id}`, employee).then(res => res.data);
+
+// Delete employee
 export const deleteEmployee = (id: number) =>
-  axios.delete(`${API_URL}/${id}`);
+  api.delete(`${EMPLOYEE_ENDPOINT}/${id}`).then(res => res.data);
